@@ -1,5 +1,6 @@
 import React from 'react';
 
+// The list data array (keep this at the top)
 const list = [
   {
     title: "React",
@@ -19,23 +20,42 @@ const list = [
   },
 ];
 
+// 1. Extracted Search Component
+function Search() {
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" />
+    </div>
+  );
+}
+
+// 2. Extracted List Component
+function List() {
+  return (
+    <ul>
+      {list.map((item) => (
+        <li key={item.objectID}>
+          <span>
+            <a href={item.url}>{item.title}</a>
+          </span>
+          <span> | Author: {item.author}</span>
+          <span> | Comments: {item.num_comments}</span>
+          <span> | Points: {item.points}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// 3. Refactored App Component
 function App() {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
+      <Search /> {/* Instantiated Search component */}
       <hr />
-      <ul>
-        {list.map((item) => (
-          <li key={item.objectID}>
-            <a href={item.url}>{item.title}</a> | 
-            Author: {item.author} | 
-            Comments: {item.num_comments} | 
-            Points: {item.points}
-          </li>
-        ))}
-      </ul>
+      <List />   {/* Instantiated List component */}
     </div>
   );
 }
