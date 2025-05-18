@@ -1,14 +1,35 @@
-import './App.css'; // This links your CSS
+// 1. Import statements (ALWAYS AT THE TOP)
+import './App.css';
+import logo from './logo.png'; // Example if you add an image
 
+// 2. Components (before exports)
+function Header() {
+  return <h2>My Header</h2>;
+}
+
+// 3. Main App component
 function App() {
-  return (
-    <div>
-      <h1>Welcome to My React App!</h1>
-      <h1>My First React App</h1>
-      <p>Start editing here!</p>
+  // Variables go here
+  const appTitle = "My React App";
+  const buttonText = "Click Me";
 
+  // JSX goes in the return statement
+  return (
+    <div className="app">
+      {/* Header component */}
+      <Header />
+      
+      {/* Main content */}
+      <h1>Welcome to {appTitle}!</h1>
+      <img src={logo} alt="Logo" width="100" />
+      <button onClick={() => alert("Hello!")}>
+        {buttonText}
+      </button>
+      
+      <p>Edit src/App.js and save to reload.</p>
     </div>
   );
 }
 
+// 4. Exports (ALWAYS LAST)
 export default App;
