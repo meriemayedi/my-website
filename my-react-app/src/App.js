@@ -10,6 +10,7 @@ function Header() {
 // 3. Main App component
 function App() {
   // Variables go here
+  
   const appTitle = "My React App";
   const buttonText = "Click Me";
 
@@ -21,6 +22,8 @@ function App() {
       
       {/* Main content */}
       <h1>Welcome to {appTitle}!</h1>
+      <label htmlFor="search">Search: </label> {/* Label for input */}
+    <input id="search" type="text" /> {/* Input field */}
       
       <button onClick={() => alert("Hello!")}>
         {buttonText}
