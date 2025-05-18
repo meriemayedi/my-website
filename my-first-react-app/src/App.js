@@ -1,8 +1,6 @@
 import * as React from 'react';
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = React.useState('');
-
   const stories = [
     {
       title: 'React',
@@ -30,6 +28,16 @@ const App = () => {
     },
   ];
 
+  // Initialize state with localStorage or default value
+  const [searchTerm, setSearchTerm] = React.useState(
+    localStorage.getItem('search') || 'React'
+  );
+
+  // Save search term to localStorage whenever it changes
+  React.useEffect(() => {
+    localStorage.setItem('search', searchTerm);
+  }, [searchTerm]);
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -38,39 +46,43 @@ const App = () => {
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  console.log('App renders');
-
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <Search onSearch={handleSearch} />
+      <Search search={searchTerm} onSearch={handleSearch} />
       <hr />
       <List list={searchedStories} />
     </div>
   );
 };
 
-const Search = ({ onSearch }) => {
-  console.log('Search renders');
-  return (
-    <div>
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={onSearch} />
-    </div>
-  );
-};
+// Search component with destructured props
+const Search = ({ search, onSearch }) => (
+  <div>
+    <label htmlFor="search">Search: </label>
+    <input
+      id="search"
+      type="text"
+      value={search}
+      onChange={onSearch}
+      placeholder="Search stories..."
+    />
+    <p>
+      <small>Current search: <strong>{search}</strong></small>
+    </p>
+  </div>
+);
 
-const List = ({ list }) => {
-  console.log('List renders');
-  return (
-    <ul>
-      {list.map((item) => (
-        <Item key={item.objectID} item={item} />
-      ))}
-    </ul>
-  );
-};
+// List component with destructured props
+const List = ({ list }) => (
+  <ul>
+    {list.map((item) => (
+      <Item key={item.objectID} item={item} />
+    ))}
+  </ul>
+);
 
+// Item component with destructured props
 const Item = ({ item }) => (
   <li>
     <span>
