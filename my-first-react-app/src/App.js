@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// List data (STEP 1)
+// Data (same as before)
 const list = [
   {
     title: "React",
@@ -20,24 +20,42 @@ const list = [
   },
 ];
 
-// Component (STEPS 2-4)
+// 1. Extracted List Component
+function List() {
+  return (
+    <ul>
+      {list.map((item) => (
+        <li key={item.objectID}>
+          <span>
+            <a href={item.url}>{item.title}</a>
+          </span>
+          <span>{item.author}</span>
+          <span>{item.num_comments}</span>
+          <span>{item.points}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// 2. Extracted Search Component
+function Search() {
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" />
+    </div>
+  );
+}
+
+// 3. Main App Component
 function App() {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
+      <Search />
       <hr />
-      <ul>
-        {list.map((item) => (
-          <li key={item.objectID}>
-            <span><a href={item.url}>{item.title}</a></span>
-            <span>{item.author}</span>
-            <span>{item.num_comments} comments</span>
-            <span>{item.points} points</span>
-          </li>
-        ))}
-      </ul>
+      <List />
     </div>
   );
 }
