@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-// Data (same as before)
 const list = [
   {
     title: "React",
@@ -20,44 +19,44 @@ const list = [
   },
 ];
 
-// 1. Extracted List Component
-function List() {
-  return (
-    <ul>
-      {list.map((item) => (
-        <li key={item.objectID}>
-          <span>
-            <a href={item.url}>{item.title}</a>
-          </span>
-          <span>{item.author}</span>
-          <span>{item.num_comments}</span>
-          <span>{item.points}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
+const List = () => (
+  <ul>
+    {list.map((item) => (
+      <li key={item.objectID}>
+        <span><a href={item.url}>{item.title}</a></span>
+        <span>{item.author}</span>
+        <span>{item.num_comments}</span>
+        <span>{item.points}</span>
+      </li>
+    ))}
+  </ul>
+);
 
-// 2. Extracted Search Component
-function Search() {
+const Search = () => {
+  const handleChange = (event) => {
+    console.log('Event:', event);
+    console.log('Value:', event.target.value);
+  };
+
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
+      <input 
+        id="search" 
+        type="text" 
+        onChange={handleChange} 
+      />
     </div>
   );
-}
+};
 
-// 3. Main App Component
-function App() {
-  return (
-    <div>
-      <h1>My Hacker Stories</h1>
-      <Search />
-      <hr />
-      <List />
-    </div>
-  );
-}
+const App = () => (
+  <div>
+    <h1>My Hacker Stories</h1>
+    <Search />
+    <hr />
+    <List />
+  </div>
+);
 
 export default App;
