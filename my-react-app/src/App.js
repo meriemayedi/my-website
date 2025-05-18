@@ -1,6 +1,6 @@
 // 1. Import statements (ALWAYS AT THE TOP)
 import './App.css';
-import logo from './logo.png'; // Example if you add an image
+
 
 // 2. Components (before exports)
 function Header() {
@@ -21,12 +21,12 @@ function App() {
       
       {/* Main content */}
       <h1>Welcome to {appTitle}!</h1>
-      <img src={logo} alt="Logo" width="100" />
+      
       <button onClick={() => alert("Hello!")}>
         {buttonText}
       </button>
       
-      <p>Edit src/App.js and save to reload.</p>
+      
     </div>
   );
 }
